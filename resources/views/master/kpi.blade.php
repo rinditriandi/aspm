@@ -7,7 +7,7 @@
 
     <!--Section: Basic examples-->
     <section>
-        <h4 class="font-bold mt-lg-5 mb-5 pb-4 text-center">Master Template</h4>
+        <h4 class="font-bold mt-lg-5 mb-5 pb-4 text-center">Master KPI</h4>
 
         <!--Top Table UI-->
         <div class="card p-2 mb-5">
@@ -42,7 +42,7 @@
                     </button>
                 </div>
 
-                <a href="" class="white-text mx-3">List Template</a>
+                <a href="" class="white-text mx-3">List KPI</a>
 
                 <div>
 
@@ -118,7 +118,7 @@
                                 <option disabled selected>Select Department</option>
                                 @foreach($departments as $department)
                                 <option 
-                                    value="{{ $department->CMD_IDX_M_Department }}"> {{ $department->DepartmentName }}
+                                    value="{{ $department->IDX_CMD_M_Department }}"> {{ $department->DepartmentName }}
                                 </option>
                                 @endforeach
                             
@@ -177,7 +177,7 @@
                                 disabled>
                                 <option value="" disabled selected>Select Department</option>
                                 @foreach($departments as $department)
-                                <option value="{{ $department->CMD_IDX_M_Department }}">{{ $department->DepartmentName }}</option>
+                                <option value="{{ $department->IDX_CMD_M_Department }}">{{ $department->DepartmentName }}</option>
                                 @endforeach
                             </select>
                             <label>Department</label>
@@ -222,10 +222,10 @@
         $('#template-table').DataTable({
             processing: true,
             serverSide: true,
-            ajax: "{{ route('api.template') }}",
+            ajax: "{{ route('api.kpi') }}",
             columns: [
                 {data: 'action', name: 'action', orderable: false, searchable: false},
-                {data: 'CMD_IDX_M_KPI', name: 'CMD_IDX_M_KPI'},
+                {data: 'IDX_CMD_M_KPI', name: 'IDX_CMD_M_KPI'},
                 {data: 'KPI', name: 'KPI'},
                 {data: 'Department', name: 'Department'}
             ]
@@ -265,7 +265,7 @@
             $('input[name=_method').val('PATCH');
             $('#addKPI form')[0].reset();
             $.ajax({
-                url: "{{ url('master/template') }}" + '/' + id + "/edit",
+                url: "{{ url('master/kpi') }}" + '/' + id + "/edit",
                 type: "GET",
                 dataType: "JSON",
                 success: function (data) {
@@ -294,7 +294,7 @@
             }).then((result) => {
                 if (result.value) {
                     $.ajax({
-                        url: "{{ url('master/template') }}" + '/' + id,
+                        url: "{{ url('master/kpi') }}" + '/' + id,
                         type: "POST",
                         data: {'_method' : 'DELETE', '_token' : csrf_token},
                         success : function(data) {
@@ -321,56 +321,4 @@
             
 </script>
 
-
-
-
-<!-- Ajax Crud Operation -->
-{{--
-<script>
-    // Add a new KPI
-    $(document).on('click', '#add-modal', function () {
-        $('.modal-title').text('Add KPI');
-        $('#addKPI').modal('show');
-    });
-
-    $('#modal-footer').on('click', '.add', function () {
-        $.ajax({
-            type: 'POST',
-            url: 'posts',
-            data: {
-                '_token': $('input[name=_token]').val(),
-                'KPI': $('#KPI_add').val(),
-                'CMD_IDX_M_Department': $('#department_add').val()
-            },
-            success: function (data) {
-                $('.errorKPI').addClass('hidden');
-                $('errorDepartment').addClass('hidden');
-
-                if ((data.errors)) {
-                    setTimeout(function () {
-                        $('#addKPI').modal('show');
-                        toastr["info"]('Validation error!', 'Error Alert', {
-                            timeout: 5000
-                        });
-                    }, 500);
-
-                    if (data.errors.KPI) {
-                        $('.errorKPI').removeClass('hidden');
-                        $('.errorKPI').text(data.errors.KPI);
-                    }
-
-                    if (data.errors.department) {
-                        $('.errorKPI').removeClass('hidden');
-                        $('.errorDepartment').text(data.errors.department);
-                    }
-                } else {
-                    toastr.success('Successfully added KPI!', 'Success Alert', {
-                        timeout: 5000
-                    });
-                    $('#template-table').prefend("tr")
-                }
-            }
-        });
-    });
-</script> --}} 
 @endsection

@@ -17,5 +17,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('template', 'Master\TemplateController@apiTemplate')->name('api.template');
+Route::get('kpi', 'Master\KPIController@apiKPI')->name('api.kpi');
 Route::get('ipm', 'Transaction\IPMController@apiIPM')->name('api.ipm');

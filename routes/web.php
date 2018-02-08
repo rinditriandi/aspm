@@ -23,5 +23,6 @@
 
     Route::group(['prefix' => 'master'], function () 
     {
-        Route::resource('template', 'Master\KPIController');
+        Route::resource('kpi', 'Master\KPIController');
+        Route::get('uom', 'Master\UoMController@index');
     });
