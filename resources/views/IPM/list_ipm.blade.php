@@ -189,7 +189,7 @@
                 orderable: false,
                 searchable: false
             },
-                {data: 'CMD_IDX_T_IPMHeader'},
+                {data: 'IDX_CMD_T_IPMHeader'},
                 {data: 'NIK'},
                 {data: 'Name'},
                 {data: 'Department'},

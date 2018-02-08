@@ -55,8 +55,8 @@ class IPMController extends Controller
 
         return DataTables::of($ipm)
         ->addColumn('action', function($ipm) {
-            return '<a onclick="deleteData('. $ipm->CMD_IDX_T_IPMHeader .')" class="btn-floating btn-tw waves-effect waves-light btn-sm" data-toggle="tooltip" data-placement="right" title="delete"><i class="material-icons">delete</i></a> ' .
-                   '<a onclick="editForm('. $ipm->CMD_IDX_T_IPMHeader .')" class="btn-floating btn-tw waves-effect waves-light btn-sm" data-toggle="tooltip" data-placement="right" title="edit"><i class="material-icons">mode_edit</i></a> ' .
+            return '<a onclick="deleteData('. $ipm->IDX_CMD_T_IPMHeader .')" class="btn-floating btn-tw waves-effect waves-light btn-sm" data-toggle="tooltip" data-placement="right" title="delete"><i class="material-icons">delete</i></a> ' .
+                   '<a onclick="editForm('. $ipm->IDX_CMD_T_IPMHeader .')" class="btn-floating btn-tw waves-effect waves-light btn-sm" data-toggle="tooltip" data-placement="right" title="edit"><i class="material-icons">mode_edit</i></a> ' .
                    '<a href="#" class="btn-floating btn-tw waves-effect waves-light btn-sm" data-toggle="tooltip" data-placement="right" title="view"><i class="material-icons">remove_red_eye</i></a>';
                 
         })->make(true);

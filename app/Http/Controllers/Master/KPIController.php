@@ -13,7 +13,7 @@ use Response;
 use App\KPI;
 use View;
 
-class TemplateController extends Controller
+class KPIController extends Controller
 {
     protected $rules = 
     [
@@ -26,7 +26,7 @@ class TemplateController extends Controller
         //$data = DB::table('CMD_M_Template')->paginate(15);
         $department = DB::select('SELECT * FROM CMD_M_Department');
        
-        return view('master/template',['departments' => $department, 'kpi' => $kpi]);
+        return view('master/template',['departments' => $department]);
     }
 
     public function create()
@@ -91,7 +91,7 @@ class TemplateController extends Controller
 
     public function apiTemplate()
     {
-        $template = DB::select('SELECT KPI.CMD_IDX_M_KPI, KPI.KPI, MDEP.DepartmentName AS Department
+        $kpi = DB::select('SELECT KPI.CMD_IDX_M_KPI, KPI.KPI, MDEP.DepartmentName AS Department
 	                                FROM [CMDDB].[dbo].[CMD_M_KPI] KPI
                                     LEFT JOIN CMDDB.DBO.CMD_M_Department MDEP ON KPI.CMD_IDX_M_Department = MDEP.CMD_IDX_M_Department
                                     ORDER BY KPI.CMD_IDX_M_KPI DESC'    
@@ -99,10 +99,10 @@ class TemplateController extends Controller
                                     
        // $template = DB::select('EXEC [dbo].[usp_CMD_M_Template_List]?,?,?,?,?,?,?', array(1,5,'RowNumber','ASC','R','Data','1'));
 
-        return DataTables::of($template)
-            ->addColumn('action', function($template) {
-                return '<a onclick="deleteData('. $template->CMD_IDX_M_KPI .')" class="btn-floating btn-tw waves-effect waves-light btn-sm delete-kpi" data-toggle="tooltip" data-placement="right" title="delete"><i class="material-icons">delete</i></a> ' .
-                       '<a onclick="editForm('. $template->CMD_IDX_M_KPI .')" class="btn-floating btn-tw waves-effect waves-light btn-sm" data-toggle="tooltip" data-placement="right" title="edit"><i class="material-icons">mode_edit</i></a> ' .
+        return DataTables::of($kpi)
+            ->addColumn('action', function($kpi) {
+                return '<a onclick="deleteData('. $template->IDX_CMD_M_KPI .')" class="btn-floating btn-tw waves-effect waves-light btn-sm delete-kpi" data-toggle="tooltip" data-placement="right" title="delete"><i class="material-icons">delete</i></a> ' .
+                       '<a onclick="editForm('. $template->IDX_CMD_M_KPI .')" class="btn-floating btn-tw waves-effect waves-light btn-sm" data-toggle="tooltip" data-placement="right" title="edit"><i class="material-icons">mode_edit</i></a> ' .
                        '<a href="#newtemplate" class="btn-floating btn-tw waves-effect waves-light btn-sm" data-toggle="modal" data-tooltip="tooltip" data-placement="top" title="view"><i class="fa fa-info" aria-hidden="true"></i></a>';
                     
             })->make(true);

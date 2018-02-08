@@ -23,5 +23,5 @@
 
     Route::group(['prefix' => 'master'], function () 
     {
-        Route::resource('template', 'Master\TemplateController');
+        Route::resource('template', 'Master\KPIController');
     });
